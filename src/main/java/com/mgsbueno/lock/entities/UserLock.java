@@ -34,6 +34,15 @@ public class UserLock {
     }
 
     public void setUsers(AppUser users) {
+
         this.users = users;
+    }
+
+    public Lock getLock() {
+        return this.lock;
+    }
+
+    public void setLock(Lock savedLock) {
+        this.lock = savedLock;
     }
 }

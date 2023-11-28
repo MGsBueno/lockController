@@ -87,5 +87,15 @@ public class UserService {
     }
 
 
+
+
+    public AppUser save(AppUser newUser) {
+        // Realiza a lógica de salvamento do novo usuário
+        return userRepository.save(newUser);
+    }
+
+
+
+
     // Outros métodos do serviço
 }
