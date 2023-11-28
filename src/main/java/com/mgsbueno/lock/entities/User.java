@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "\"user\"") // Usando aspas duplas para escapar o nome da tabela
+
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +19,7 @@ public class User {
 
     private boolean registred;
 
-    @OneToMany(mappedBy = "User")
+    @OneToMany(mappedBy = "users")
     private List<UserLock> userLock;
 
     public int getHierarchyLevel() {

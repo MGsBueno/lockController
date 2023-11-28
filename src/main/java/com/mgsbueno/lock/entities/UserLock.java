@@ -23,4 +23,17 @@ public class UserLock {
     @Column(name = "success")
     private boolean sucess;
 
+    public UserLock() {
+    }
+
+    @ManyToOne(optional = false)
+    private User users;
+
+    public User getUsers() {
+        return users;
+    }
+
+    public void setUsers(User users) {
+        this.users = users;
+    }
 }
