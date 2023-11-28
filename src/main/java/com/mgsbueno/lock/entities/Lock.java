@@ -20,4 +20,12 @@ public class Lock {
     public void setName(String name) {
         this.name = name;
     }
+
+    public void setSite(String exampleSite) {
+        this.site = exampleSite;
+    }
+
+    public String getSite() {
+        return this.site;
+    }
 }

@@ -1,7 +1,8 @@
 package com.mgsbueno.lock.services;
 
-import com.mgsbueno.lock.entities.User;
+import com.mgsbueno.lock.entities.AppUser;
 import com.mgsbueno.lock.repositories.UserRepository;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
@@ -14,12 +15,12 @@ public class UserService {
     }
 
     public String becomeAdmin(Long adminId, Long userId) {
-        Optional<User> optionalAdmin = userRepository.findById(adminId);
-        Optional<User> optionalUser = userRepository.findById(userId);
+        Optional<AppUser> optionalAdmin = userRepository.findById(adminId);
+        Optional<AppUser> optionalUser = userRepository.findById(userId);
 
         if (optionalAdmin.isPresent() && optionalUser.isPresent()) {
-            User admin = optionalAdmin.get();
-            User user = optionalUser.get();
+            AppUser admin = optionalAdmin.get();
+            AppUser user = optionalUser.get();
 
             if (admin.isAdmin() || admin.getHierarchyLevel() == 0) {
                 user.setAdmin(true);
@@ -34,12 +35,12 @@ public class UserService {
     }
 
     public String changeHierarchyLevel(Long adminId, Long userId, int newhierarchyLevel, boolean isadminState) {
-        Optional<User> optionalAdmin = userRepository.findById(adminId);
-        Optional<User> optionalUserToBeModified = userRepository.findById(userId);
+        Optional<AppUser> optionalAdmin = userRepository.findById(adminId);
+        Optional<AppUser> optionalUserToBeModified = userRepository.findById(userId);
 
         if (optionalAdmin.isPresent() && optionalUserToBeModified.isPresent()) {
-            User admin = optionalAdmin.get();
-            User userToBeModified = optionalUserToBeModified.get();
+            AppUser admin = optionalAdmin.get();
+            AppUser userToBeModified = optionalUserToBeModified.get();
 
             // Verifica se o usuário que está requisitando é um administrador
             if (!admin.isAdmin()) {
@@ -62,11 +63,11 @@ public class UserService {
         }
     }
 
-    public String acceptUserRegistration(Long adminId, User newUser) {
-        Optional<User> optionalAdmin = userRepository.findById(adminId);
+    public String acceptUserRegistration(Long adminId, AppUser newUser) {
+        Optional<AppUser> optionalAdmin = userRepository.findById(adminId);
 
         if (optionalAdmin.isPresent()) {
-            User admin = optionalAdmin.get();
+            AppUser admin = optionalAdmin.get();
 
             if (admin.isAdmin()) {
                 newUser.setRegistered(true);
@@ -80,6 +81,10 @@ public class UserService {
         }
     }
 
+    public AppUser findById(Long userId) throws ChangeSetPersister.NotFoundException {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new ChangeSetPersister.NotFoundException());
+    }
 
 
     // Outros métodos do serviço

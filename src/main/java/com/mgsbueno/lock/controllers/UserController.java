@@ -1,6 +1,6 @@
 package com.mgsbueno.lock.controllers;
 
-import com.mgsbueno.lock.entities.User;
+import com.mgsbueno.lock.entities.AppUser;
 import com.mgsbueno.lock.services.UserService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +17,7 @@ public class UserController {
     }
 
     @PostMapping("/accept-user-registration/{adminId}")
-    public String acceptUserRegistration(@PathVariable Long adminId, @RequestBody User newUser) {
+    public String acceptUserRegistration(@PathVariable Long adminId, @RequestBody AppUser newUser) {
         return userService.acceptUserRegistration(adminId, newUser);
     }
 }
