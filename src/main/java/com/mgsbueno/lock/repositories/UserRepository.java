@@ -1,10 +1,13 @@
 package com.mgsbueno.lock.repositories;
 
-import com.mgsbueno.lock.entities.User;
+import com.mgsbueno.lock.entities.AppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-    // Métodos específicos, se necessário
+public interface UserRepository extends JpaRepository<AppUser, Long> {
+
+
 }

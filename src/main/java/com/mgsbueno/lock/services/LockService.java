@@ -1,6 +1,6 @@
 package com.mgsbueno.lock.services;
 
-import com.mgsbueno.lock.entities.Lock;
+import com.mgsbueno.lock.entities.DoorLock;
 import com.mgsbueno.lock.repositories.LockRepository;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
@@ -13,19 +13,20 @@ public class LockService {
         this.lockRepository = lockRepository;
     }
 
-    public Lock save(Lock lock) {
+
+    public DoorLock save(DoorLock lock) {
         // Lógica de validação, se necessário
         return lockRepository.save(lock);
     }
 
-    public Lock findById(Long id) throws ChangeSetPersister.NotFoundException {
+    public DoorLock findById(Long id) throws ChangeSetPersister.NotFoundException {
         // Adicionar lógica de verificação de existência, se necessário
         return lockRepository.findById(id)
                 .orElseThrow(() -> new ChangeSetPersister.NotFoundException());
     }
 
-    public Lock update(Long id, Lock updatedLock) throws ChangeSetPersister.NotFoundException {
-        Lock existingLock = findById(id);
+    public DoorLock update(Long id, DoorLock updatedLock) throws ChangeSetPersister.NotFoundException {
+        DoorLock existingLock = findById(id);
 
         // Atualiza os campos do objeto existente com base nos dados atualizados
         existingLock.setName(updatedLock.getName());

@@ -11,11 +11,11 @@ public class UserLock {
 
     @ManyToOne
     @JoinColumn(name = "User_id")
-    private User user;
+    private AppUser user;
 
     @ManyToOne
     @JoinColumn(name = "Lock_id")
-    private Lock lock;
+    private DoorLock lock;
 
     @Column(name = "timeStamp") // hora de acesso
     private LocalDateTime timeStamp;
@@ -27,13 +27,13 @@ public class UserLock {
     }
 
     @ManyToOne(optional = false)
-    private User users;
+    private AppUser users;
 
-    public User getUsers() {
+    public AppUser getUsers() {
         return users;
     }
 
-    public void setUsers(User users) {
+    public void setUsers(AppUser users) {
         this.users = users;
     }
 }
